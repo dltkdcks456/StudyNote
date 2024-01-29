@@ -9,11 +9,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import db.DataBase;
 import model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import util.HttpRequestUtils;
 import util.IOUtils;
 
 public class RequestHandler extends Thread {
@@ -36,71 +35,129 @@ public class RequestHandler extends Thread {
             byte[] body = "재배포 완료!!🥳".getBytes();
 
             BufferedReader br = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
-            boolean flag = true, checkPostMethod = false;
             int contentLength = 0;
 
-            while (true) {
-                String content = br.readLine();
-                log.info("Input Data : {}", content);
-                // 요청 첫 줄 추출 후 분석
-                if (flag) {
-                    log.debug("First line : {}", content);
-                    String[] tokens = content.split(" ");
-                    String url = Arrays.asList(tokens).get(1);
+            // 첫 번째 Request 내용에서 type과 url 구분하기
+            String content = br.readLine();
+            log.debug("First line : {}", content);
+            String[] tokens = content.split(" ");
+            String type = tokens[0];
+            String url = tokens[1];
 
-                    if (tokens[0].equals("POST")) {
-                        log.info("Post 요청");
-                        checkPostMethod = true;
-                    }
-
-                    if (!(url.equals("/") || checkPostMethod)) {
-                        body = Files.readAllBytes(new File("./webapp" + url).toPath());
-                    }
-
-                    flag = false;
-                }
-
-                // Content-Length 추출
-                if (content != null && content.contains("Content-Length")) {
-                    String[] tokens = content.split(" ");
-                    contentLength = Integer.parseInt(tokens[1]);
-                }
-
-                // 빈 내용을 받을 경우 while문 정지
-                if ((content == null || content.isEmpty())) {
+            switch (type) {
+                case "GET":
+                    getGeneralRequest(content, br, url, body, dos);
                     break;
-                }
+                case "POST":
+                    if (url.equals("/user/login")) {
+                        postLoginRequest(content, br, dos);
+                    } else {
+                        postRequest(content, contentLength, br, dos);
+                    }
+                    break;
+                default:
+                    break;
             }
 
-            // Post 요청 시 Body 데이터 추출
-            if (checkPostMethod) {
-                String readData = IOUtils.readData(br, contentLength);
-                readData = URLDecoder.decode(readData, StandardCharsets.UTF_8);
-                Map<String, String> userData = new HashMap<>();
-                String[] data = readData.split("&");
-                Arrays.stream(data)
-                        .forEach(d -> {
-                    String[] split = d.split("=");
-                            userData.put(split[0], split[1]);
-                });
-
-                User user = new User(userData.get("userId"), userData.get("password"), userData.get("name"), userData.get("email"));
-                log.info("유저 탄생🥳 = {}", user);
-                body = Files.readAllBytes(new File("./webapp/index.html").toPath());
-                response300Header(dos, body.length);
-                responseBody(dos, body);
-            } else {
-                response200Header(dos, body.length);
-                responseBody(dos, body);
-            }
         } catch (IOException e) {
             log.error(e.getMessage());
         }
     }
 
-    private void response300Header(DataOutputStream dos, int lengthOfBodyContent) {
+    private void postLoginRequest(String content, BufferedReader br, DataOutputStream dos) throws IOException {
+        int contentLength = 0;
+        while(true) {
+            log.info("Input Data : {}", content);
+            content = br.readLine();
+
+            // Content-Length 추출
+            if (content != null && content.contains("Content-Length")) {
+                String[] tokens = content.split(" ");
+                contentLength = Integer.parseInt(tokens[1]);
+            }
+
+            if (whileConditionCheck(content)) break;
+        }
+
+        Map<String, String> userData = new HashMap<>();
+        String readData = IOUtils.readData(br, contentLength);
+        String[] data = readData.split("&");
+        Arrays.stream(data)
+                .forEach(d -> {
+                    String[] tokens = d.split("=");
+                    userData.put(tokens[0], tokens[1]);
+                });
+        User user = DataBase.findUserById(userData.get("userId"));
+        log.info("login form data: {}📌", readData);
+        if (user == null) {
+            // 로그인 실패
+        } else {
+            // 로그인 성공
+        }
+
+    }
+
+    private void getGeneralRequest(String content, BufferedReader br, String url, byte[] body, DataOutputStream dos) throws IOException {
+        while (true) {
+            log.info("Input Data : {}", content);
+            content = br.readLine();
+            // URL을 body로 전달
+            if (!url.equals("/")) {
+                body = Files.readAllBytes(new File("./webapp" + url).toPath());
+            }
+
+            if (whileConditionCheck(content)) break;
+        }
+        response200Header(dos, body.length);
+        responseBody(dos, body);
+    }
+
+    private static boolean whileConditionCheck(String content) {
+        // 빈 내용을 받을 경우 while문 정지
+        if ((content == null || content.isEmpty())) {
+            return true;
+        }
+        return false;
+    }
+
+    private void postRequest(String content, int contentLength, BufferedReader br, DataOutputStream dos) throws IOException {
+        while (true) {
+            log.info("Input Data : {}", content);
+            content = br.readLine();
+
+            // Content-Length 추출
+            if (content != null && content.contains("Content-Length")) {
+                String[] tokens = content.split(" ");
+                contentLength = Integer.parseInt(tokens[1]);
+            }
+            // 빈 내용을 받을 경우 while문 정지
+            if (whileConditionCheck(content)) break;
+        }
+
+        // Post 요청 시 Body 데이터 추출
+        String readData = IOUtils.readData(br, contentLength);
+        readData = URLDecoder.decode(readData, StandardCharsets.UTF_8);
+        Map<String, String> userData = new HashMap<>();
+        String[] data = readData.split("&");
+        Arrays.stream(data)
+                .forEach(d -> {
+            String[] split = d.split("=");
+                    userData.put(split[0], split[1]);
+        });
+
+        User user = new User(userData.get("userId"), userData.get("password"), userData.get("name"), userData.get("email"));
+        log.info("유저 탄생🥳 = {}", user);
+        DataBase.addUser(user);
+        log.info("⭐유저 저장 완료⭐");
+        byte[] body = Files.readAllBytes(new File("./webapp/index.html").toPath());
+        String redirectUrl = "http://localhost:8080/index.html";
+        response302Header(dos, body.length, redirectUrl);
+    }
+
+    private void response302Header(DataOutputStream dos, int lengthOfBodyContent, String newUrl) {
         try {
             dos.writeBytes("HTTP/1.1 302 OK \r\n");
+            dos.writeBytes("Location: " + newUrl + "\r\n");
             dos.writeBytes("Content-Type: text/html;charset=utf-8\r\n");
             dos.writeBytes("Content-Length: " + lengthOfBodyContent + "\r\n");
             dos.writeBytes("\r\n");
