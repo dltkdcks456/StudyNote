@@ -40,6 +40,7 @@ public class RequestHandler extends Thread {
             // 첫 번째 Request 내용에서 type과 url 구분하기
             String content = br.readLine();
             log.debug("First line : {}", content);
+
             String[] tokens = content.split(" ");
             String type = tokens[0];
             String url = tokens[1];
@@ -66,7 +67,7 @@ public class RequestHandler extends Thread {
 
     private void postLoginRequest(String content, BufferedReader br, DataOutputStream dos) throws IOException {
         int contentLength = 0;
-        while(true) {
+        while (true) {
             log.info("Input Data : {}", content);
             content = br.readLine();
 
@@ -89,12 +90,18 @@ public class RequestHandler extends Thread {
                 });
         User user = DataBase.findUserById(userData.get("userId"));
         log.info("login form data: {}📌", readData);
-        if (user == null) {
+        if (user == null || !user.getUserId().equals(userData.get("userId")) || !user.getPassword().equals(userData.get("password"))) {
             // 로그인 실패
+            log.info("로그인 실패!!");
+            byte[] body = Files.readAllBytes(new File("./webapp/user/login_failed.html").toPath());
+            response401LoginFailHeader(dos, body.length);
+            responseBody(dos, body);
         } else {
             // 로그인 성공
+            // body에는 내용이 없어도 되나?
+            byte[] body = Files.readAllBytes(new File("./webapp/index.html").toPath());
+            response302LoginSuccessHeader(dos);
         }
-
     }
 
     private void getGeneralRequest(String content, BufferedReader br, String url, byte[] body, DataOutputStream dos) throws IOException {
@@ -141,9 +148,9 @@ public class RequestHandler extends Thread {
         String[] data = readData.split("&");
         Arrays.stream(data)
                 .forEach(d -> {
-            String[] split = d.split("=");
+                    String[] split = d.split("=");
                     userData.put(split[0], split[1]);
-        });
+                });
 
         User user = new User(userData.get("userId"), userData.get("password"), userData.get("name"), userData.get("email"));
         log.info("유저 탄생🥳 = {}", user);
@@ -156,11 +163,12 @@ public class RequestHandler extends Thread {
 
     private void response302Header(DataOutputStream dos, int lengthOfBodyContent, String newUrl) {
         try {
-            dos.writeBytes("HTTP/1.1 302 OK \r\n");
+            dos.writeBytes("HTTP/1.1 302 Found \r\n");
             dos.writeBytes("Location: " + newUrl + "\r\n");
             dos.writeBytes("Content-Type: text/html;charset=utf-8\r\n");
             dos.writeBytes("Content-Length: " + lengthOfBodyContent + "\r\n");
             dos.writeBytes("\r\n");
+            dos.flush();
         } catch (IOException e) {
             log.error(e.getMessage());
         }
@@ -171,6 +179,31 @@ public class RequestHandler extends Thread {
             dos.writeBytes("HTTP/1.1 200 OK \r\n");
             dos.writeBytes("Content-Type: text/html;charset=utf-8\r\n");
             dos.writeBytes("Content-Length: " + lengthOfBodyContent + "\r\n");
+            dos.writeBytes("\r\n");
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
+    }
+
+    private void response302LoginSuccessHeader(DataOutputStream dos) {
+        try {
+            dos.writeBytes("HTTP/1.1 302 Found \r\n");
+            dos.writeBytes("Content-Type: text/html;charset=utf-8\r\n");
+            dos.writeBytes("Set-Cookie: logined=true\r\n");
+            dos.writeBytes("Location: /index.html\r\n");
+            dos.writeBytes("\r\n");
+            dos.flush();
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
+    }
+
+    private void response401LoginFailHeader(DataOutputStream dos, int lengthOfBodyContent) {
+        try {
+            dos.writeBytes("HTTP/1.1 401 Unauthorized \r\n");
+            dos.writeBytes("Content-Type: text/html;charset=utf-8\r\n");
+            dos.writeBytes("Content-Length: " + lengthOfBodyContent + "\r\n");
+            dos.writeBytes("Set-Cookie: logined=false\r\n");
             dos.writeBytes("\r\n");
         } catch (IOException e) {
             log.error(e.getMessage());
