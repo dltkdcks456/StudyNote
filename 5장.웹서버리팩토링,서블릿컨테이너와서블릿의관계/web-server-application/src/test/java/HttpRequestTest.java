@@ -2,6 +2,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import webserver.HttpMethod;
 import webserver.HttpRequest;
 
 import java.io.File;
@@ -24,7 +25,7 @@ public class HttpRequestTest {
         InputStream in = new FileInputStream(file);
         HttpRequest httpRequest = new HttpRequest(in);
 
-        assertThat(httpRequest.getMethod()).isEqualTo("GET");
+        assertThat(httpRequest.getMethod()).isEqualTo(HttpMethod.GET);
         assertThat(httpRequest.getHeaders("Host")).isEqualTo("localhost:8080");
         assertThat(httpRequest.getPath()).isEqualTo("/user/create");
         assertThat(httpRequest.getHeaders("Connection")).isEqualTo("keep-alive");
@@ -37,7 +38,7 @@ public class HttpRequestTest {
         InputStream in = new FileInputStream(new File(testDirectory + "Http_POST.txt"));
         HttpRequest httpRequest = new HttpRequest(in);
 
-        assertThat(httpRequest.getMethod()).isEqualTo("POST");
+        assertThat(httpRequest.getMethod()).isEqualTo(HttpMethod.POST);
         assertThat(httpRequest.getPath()).isEqualTo("/user/create");
         assertThat(httpRequest.getHeaders("Connection")).isEqualTo("keep-alive");
         assertThat(httpRequest.getParams("name")).isEqualTo("SangChan");
