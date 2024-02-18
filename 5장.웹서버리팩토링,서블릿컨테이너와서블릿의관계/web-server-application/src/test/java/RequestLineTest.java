@@ -1,7 +1,6 @@
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import webserver.HttpMethod;
-import webserver.RequestLine;
+import webserver.enums.HttpMethod;
+import webserver.request.RequestLine;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -1,9 +1,10 @@
-package webserver;
+package webserver.request;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import util.HttpRequestUtils;
 import util.IOUtils;
+import webserver.enums.HttpMethod;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

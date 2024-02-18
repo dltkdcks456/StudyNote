@@ -2,15 +2,14 @@ import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import webserver.HttpMethod;
-import webserver.HttpRequest;
+import webserver.enums.HttpMethod;
+import webserver.request.HttpRequest;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
