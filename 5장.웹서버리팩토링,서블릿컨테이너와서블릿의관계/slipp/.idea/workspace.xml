@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="75f6d159-7b30-4805-89aa-de634d7112ef" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/annotations-api.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ecj-4.27.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/tomcat-dbcp.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/tomcat-embed-core.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/tomcat-embed-el.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/tomcat-embed-jasper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/tomcat-embed-programmatic.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/tomcat-embed-websocket.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/net/slipp/HelloWroldServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/net/slipp/WebServerLauncher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webapp/index.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="2cXHBypCtw9ENl1h9uJL5NgcfXL" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/SSAFY_SangChan/Desktop/StudyNote/5장.웹서버리팩토링,서블릿컨테이너와서블릿의관계/slipp/lib/tomcat-embed-websocket.jar",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\SSAFY_SangChan\Desktop\StudyNote\5장.웹서버리팩토링,서블릿컨테이너와서블릿의관계\slipp\lib" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="WebServerLauncher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="net.slipp.WebServerLauncher" />
+      <module name="slipp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="net.slipp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.WebServerLauncher" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="75f6d159-7b30-4805-89aa-de634d7112ef" name="Changes" comment="" />
+      <created>1708250877473</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1708250877473</updated>
+    </task>
+    <servers />
+  </component>
+</project>
