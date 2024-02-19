@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="75f6d159-7b30-4805-89aa-de634d7112ef" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/annotations-api.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ecj-4.27.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/tomcat-dbcp.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/tomcat-embed-core.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/tomcat-embed-el.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/tomcat-embed-jasper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/tomcat-embed-programmatic.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/tomcat-embed-websocket.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/net/slipp/HelloWroldServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/net/slipp/WebServerLauncher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webapp/index.html" afterDir="false" />
-    </list>
+    <list default="true" id="75f6d159-7b30-4805-89aa-de634d7112ef" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,25 +23,25 @@
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2cXHBypCtw9ENl1h9uJL5NgcfXL" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/SSAFY_SangChan/Desktop/StudyNote/5장.웹서버리팩토링,서블릿컨테이너와서블릿의관계/slipp/lib/tomcat-embed-websocket.jar",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/SSAFY_SangChan/Desktop/StudyNote/5장.웹서버리팩토링,서블릿컨테이너와서블릿의관계/slipp/lib/tomcat-embed-websocket.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\SSAFY_SangChan\Desktop\StudyNote\5장.웹서버리팩토링,서블릿컨테이너와서블릿의관계\slipp\lib" />
