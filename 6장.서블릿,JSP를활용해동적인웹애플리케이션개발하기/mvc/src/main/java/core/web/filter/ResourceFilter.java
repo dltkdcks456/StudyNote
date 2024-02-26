@@ -33,6 +33,7 @@ public class ResourceFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
+        logger.info("init❓❓");
         this.defaultRequestDispatcher = filterConfig.getServletContext().getNamedDispatcher("default");
     }
 
@@ -41,8 +42,9 @@ public class ResourceFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         String path = req.getRequestURI().substring(req.getContextPath().length());
+        logger.info("✅✅✅path: {}", path);
         if (isResourceUrl(path)) {
-            logger.debug("path : {}", path);
+            logger.info("path : {}", path);
             defaultRequestDispatcher.forward(request, response);
         } else {
             chain.doFilter(request, response);
