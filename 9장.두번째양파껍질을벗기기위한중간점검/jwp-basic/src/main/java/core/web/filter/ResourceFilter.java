@@ -16,8 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
-@WebFilter("/*")
 public class ResourceFilter implements Filter {
     private static final Logger logger = LoggerFactory.getLogger(ResourceFilter.class);
     private static final List<String> resourcePrefixs = new ArrayList<>();
@@ -39,6 +40,7 @@ public class ResourceFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
+        logger.info("333333333");
         HttpServletRequest req = (HttpServletRequest) request;
         String path = req.getRequestURI().substring(req.getContextPath().length());
         if (isResourceUrl(path)) {

@@ -36,3 +36,24 @@ String.prototype.format = function() {
         ;
   });
 };
+
+//$("form[name='question'] button[type='submit']").click(AddQuestion);
+//
+//function AddQuestion(e) {
+//    e.preventDefault();
+//
+//    var queryString = $("form[name='question']").serialize();
+//
+//    $.ajax({
+//        type: 'post',
+//        url: '/api/qna/addQuestion',
+//        data: queryString,
+//        dataType: 'json',
+//        error: function(xhr, status, error) {
+//            alert('error: ' + xhr.status + " - " + error);
+//        },
+//        success: function(json, status) {
+//            console.log("질문생성 완료!");
+//        }
+//    })
+//}
