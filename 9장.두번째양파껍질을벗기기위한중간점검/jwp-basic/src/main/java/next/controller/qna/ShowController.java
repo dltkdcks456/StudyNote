@@ -11,8 +11,11 @@ import next.model.Answer;
 import next.model.Question;
 import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ShowController extends AbstractController {
+    private static Logger log = LoggerFactory.getLogger(ShowController.class);
     private QuestionDao questionDao = new QuestionDao();
     private AnswerDao answerDao = new AnswerDao();
     private Question question;
@@ -24,7 +27,9 @@ public class ShowController extends AbstractController {
 
         question = questionDao.findById(questionId);
         answers = answerDao.findAllByQuestionId(questionId);
-
+        for (Answer answer : answers) {
+            log.info("answer : {}", answer);
+        }
         ModelAndView mav = jspView("/qna/show.jsp");
         mav.addObject("question", question);
         mav.addObject("answers", answers);
