@@ -13,6 +13,8 @@ import next.controller.user.ProfileController;
 import next.controller.user.UpdateFormUserController;
 import next.controller.user.UpdateUserController;
 
+import next.dao.AnswerDao;
+import next.dao.QuestionDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +34,7 @@ public class RequestMapping {
         mappings.put("/users/updateForm", new UpdateFormUserController());
         mappings.put("/users/update", new UpdateUserController());
         mappings.put("/qna/form", new CreateQuestionFormController());
-        mappings.put("/qna/show", new ShowController());
+        mappings.put("/qna/show", new ShowController(new QuestionDao(), new AnswerDao()));
         mappings.put("/api/qna/addAnswer", new AddAnswerController());
         mappings.put("/api/qna/deleteAnswer", new DeleteAnswerController());
         mappings.put("/api/qna/addQuestion", new CreateQuestionController());

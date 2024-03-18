@@ -16,19 +16,23 @@ import org.slf4j.LoggerFactory;
 
 public class ShowController extends AbstractController {
     private static Logger log = LoggerFactory.getLogger(ShowController.class);
-    private QuestionDao questionDao = new QuestionDao();
-    private AnswerDao answerDao = new AnswerDao();
+    private QuestionDao questionDao;
+    private AnswerDao answerDao;
     private Question question;
     private List<Answer> answers;
+
+    public ShowController(QuestionDao questionDao, AnswerDao answerDao) {
+        this.questionDao = questionDao;
+        this.answerDao = answerDao;
+    }
 
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse response) throws Exception {
         Long questionId = Long.parseLong(req.getParameter("questionId"));
-
         question = questionDao.findById(questionId);
         answers = answerDao.findAllByQuestionId(questionId);
         for (Answer answer : answers) {
-            log.info("answer : {}", answer);
+            log.info("questionId: {}, answer : {}", questionId, answer);
         }
         ModelAndView mav = jspView("/qna/show.jsp");
         mav.addObject("question", question);
