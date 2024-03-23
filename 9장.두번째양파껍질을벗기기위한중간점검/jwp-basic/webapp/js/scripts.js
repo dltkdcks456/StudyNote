@@ -21,6 +21,18 @@ function onSuccess(json, status){
   var answerTemplate = $("#answerTemplate").html();
   var template = answerTemplate.format(answer.writer, new Date(answer.createdDate), answer.contents, answer.answerId, answer.answerId);
   $(".qna-comment-slipp-articles").prepend(template);
+
+  var countOfAnswer = json.countOfAnswer;
+  updateCountOfAnswer(countOfAnswer);
+
+  resetInputValue();
+}
+function updateCountOfAnswer(count) {
+    $(".qna-comment-count strong").text(count);
+}
+
+function resetInputValue() {
+    $(".answerWrite input[type='text'], .answerWrite textarea").val("");
 }
 
 function onError(xhr, status) {
