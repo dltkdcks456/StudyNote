@@ -49,6 +49,36 @@ String.prototype.format = function() {
   });
 };
 
+$(".article-util button[type=submit]").click(deleteAnswer);
+
+function deleteAnswer(e) {
+    e.preventDefault();
+
+    var article = $(this).closest("article");
+    article.remove();
+
+    var countOfAnswer = $(".qna-comment-count strong").text();
+    $(".qna-comment-count strong").text(countOfAnswer - 1);
+
+    var form = $(this).closest("form");
+    var answerId = form.find("input[name='answerId']").val();
+    var questionId = form.find("input[name='questionId']").val();
+    console.log(questionId);
+    $.ajax({
+        type: 'post',
+        url: '/api/qna/deleteAnswer',
+        data: {answerId : answerId, questionId : questionId},
+        dataType: 'json',
+        error: function(xhr, status) {
+            alert("error");
+        },
+        success: function(json, status) {
+            console.log("article 삭제");
+            console.log(json.result.status);
+        }
+    })
+}
+
 //$("form[name='question'] button[type='submit']").click(AddQuestion);
 //
 //function AddQuestion(e) {

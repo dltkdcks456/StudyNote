@@ -25,7 +25,7 @@ public class AddAnswerController extends AbstractController {
         Answer answer = new Answer(req.getParameter("writer"), req.getParameter("contents"),
                 questionId);
         log.debug("answer : {}", answer);
-        questionDao.updateCountOfAnswer(questionId);
+        questionDao.updateCountOfAnswer(questionId, 1);
         Question question = questionDao.findById(questionId);
         Answer savedAnswer = answerDao.insert(answer);
         return jsonView().addObject("answer", savedAnswer).addObject("countOfAnswer", question.getCountOfComment());

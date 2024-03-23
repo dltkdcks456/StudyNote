@@ -21,12 +21,12 @@ public class QuestionDao {
 //                "WHERE questionId = ?";
 //        jdbcTemplate.update(sql, question.getTitle(), question.getContents(), question.getCountOfComment() + 1, question.getQuestionId());
 //    }
-    public void updateCountOfAnswer(Long questionId) {
+    public void updateCountOfAnswer(Long questionId, int cnt) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate();
         String sql = "UPDATE QUESTIONS " +
-                "SET countOfAnswer = countOfAnswer + 1" +
+                "SET countOfAnswer = countOfAnswer + ?" +
                 "WHERE questionId = ?";
-        jdbcTemplate.update(sql, questionId);
+        jdbcTemplate.update(sql, cnt, questionId);
     }
 
     public Question insert(Question question) {
