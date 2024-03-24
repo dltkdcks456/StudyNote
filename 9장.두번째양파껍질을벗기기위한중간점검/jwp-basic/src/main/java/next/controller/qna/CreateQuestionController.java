@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 public class CreateQuestionController extends AbstractController {
     static final Logger log = LoggerFactory.getLogger(CreateQuestionController.class);
+    private final QuestionDao questionDao = QuestionDao.getInstance();
 
     @Override
     public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -32,7 +33,6 @@ public class CreateQuestionController extends AbstractController {
 
         Question question = new Question(user.getUserId(), title, contents);
 
-        QuestionDao questionDao = new QuestionDao();
         questionDao.insert(question);
         return jspView("redirect:/");
     }

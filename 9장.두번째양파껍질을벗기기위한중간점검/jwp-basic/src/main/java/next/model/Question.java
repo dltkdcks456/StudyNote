@@ -53,6 +53,10 @@ public class Question {
         return this.createdDate.getTime();
     }
 
+    public boolean isSameUser(User user) {
+        return user.isSameUser(this.writer);
+    }
+
     public int getCountOfComment() {
         return countOfComment;
     }
