@@ -25,6 +25,10 @@ public class Answer {
         this.questionId = questionId;
     }
 
+    public boolean isSameUser(User user) {
+        return user.isSameUser(this.writer);
+    }
+
     public long getAnswerId() {
         return answerId;
     }

@@ -25,6 +25,11 @@ public class QuestionDao {
         return questionDao;
     }
 
+    public void delete(long questionId) {
+        String sql = "DELETE FROM QUESTIONS where questionId = ?";
+        jdbcTemplate.update(sql, questionId);
+    }
+
     public void update(String title, String contents, long questionId) {
         String sql = "UPDATE QUESTIONS " +
                 "SET title = ?, contents = ?" +

@@ -25,6 +25,11 @@ public class AnswerDao {
         return answerDao;
     }
 
+    public void deleteAllByQuestionId(long questionId) {
+        String sql = "DELETE FROM ANSWERS WHERE questionId = ?";
+        jdbcTemplate.update(sql, questionId);
+    }
+
     public Answer insert(Answer answer) {
         String sql = "INSERT INTO ANSWERS (writer, contents, createdDate, questionId) VALUES (?, ?, ?, ?)";
         PreparedStatementCreator psc = new PreparedStatementCreator() {

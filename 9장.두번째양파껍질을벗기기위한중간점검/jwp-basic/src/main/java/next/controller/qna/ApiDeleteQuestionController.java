@@ -4,6 +4,7 @@ import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
 import next.controller.UserSessionUtils;
 import next.exception.CannotDeleteException;
+import next.model.Result;
 import next.model.User;
 import next.service.QnaService;
 
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class DeleteQuestionController extends AbstractController {
+public class ApiDeleteQuestionController extends AbstractController {
     private final QnaService qnaService = QnaService.getInstance();
 
     @Override
@@ -21,14 +22,14 @@ public class DeleteQuestionController extends AbstractController {
         User user = UserSessionUtils.getUserFromSession(session);
 
         if (!UserSessionUtils.isLogined(session)) {
-            return jspView("redirect:/users/loginForm");
+            return jsonView().addObject("result", Result.fail("로그인이 필요합니다."));
         }
 
         try {
             qnaService.deleteQuestion(questionId, user);
-            return jspView("redirect:/");
+            return jsonView().addObject("result", Result.ok());
         } catch (CannotDeleteException e) {
-            return jspView("/qna/errorHandling.jsp").addObject("errorMessage", e.getMessage());
+            return jsonView().addObject("result", Result.fail(e.getMessage()));
         }
     }
 }

@@ -49,7 +49,7 @@ String.prototype.format = function() {
   });
 };
 
-$(".article-util button[type=submit]").click(deleteAnswer);
+$(".article-util button[name=answer]").click(deleteAnswer);
 
 function deleteAnswer(e) {
     e.preventDefault();
