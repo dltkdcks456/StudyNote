@@ -15,6 +15,7 @@ import next.controller.user.UpdateUserController;
 
 import next.dao.AnswerDao;
 import next.dao.QuestionDao;
+import next.service.QnaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +38,7 @@ public class RequestMapping {
         mappings.put("/qna/show", new ShowController(QuestionDao.getInstance(), AnswerDao.getInstance()));
         mappings.put("/api/qna/addQuestion", new CreateQuestionController());
         mappings.put("/api/qna/updateQuestion", new UpdateQuestionController());
-        mappings.put("/api/qna/deleteQuestion", new DeleteQuestionController());
+        mappings.put("/api/qna/deleteQuestion", new DeleteQuestionController(QnaService.getInstance()));
         mappings.put("/api/qna/updateFormQuestion", new UpdateFormQuestionController());
         mappings.put("/api/qna/list", new QuestionListController());
         mappings.put("/api/qna/addAnswer", new AddAnswerController());
